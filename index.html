@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>St. Pete Tallow — Ancestral Luxury Skincare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black:      #0A0A0A;
+  --black-soft: #141414;
+  --black-mid:  #1E1E1E;
+  --gold:       #C9A84C;
+  --gold-light: #E8C96A;
+  --gold-pale:  #F5E9C8;
+  --gold-dim:   #8A6A28;
+  --cream:      #FAF7F0;
+  --cream-dark: #F0EAD8;
+  --white:      #FFFFFF;
+  --gray-1:     #888888;
+  --gray-2:     #CCCCCC;
+  --sage:       #7A9E7E;
+  --cobalt:     #1B4F8A;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-head:    'Playfair Display', Georgia, serif;
+  --font-body:    'Montserrat', sans-serif;
+  --nav-h: 80px;
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--gold-dim); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 52px;
+  z-index: 1000;
+  transition: all 0.4s var(--ease);
+}
+nav.scrolled {
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.nav-brand {
+  display: flex; align-items: center; gap: 14px;
+}
+.nav-turtle {
+  width: 44px; height: 44px; object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(201,168,76,0.5));
+  transition: filter 0.3s ease;
+}
+.nav-turtle:hover { filter: drop-shadow(0 0 18px rgba(201,168,76,0.8)); }
+.nav-wordmark { display: flex; flex-direction: column; gap: 1px; }
+.nav-main {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: 13px; letter-spacing: 4px; color: var(--white);
+}
+.nav-sub {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 11px; letter-spacing: 2px; color: var(--gold);
+}
+.nav-links { display: flex; gap: 40px; list-style: none; align-items: center; }
+.nav-links a {
+  font-size: 10px; letter-spacing: 3px; font-weight: 500;
+  color: var(--gray-2); transition: all 0.3s ease;
+  position: relative; padding-bottom: 3px;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width 0.3s ease;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  border: 1px solid var(--gold) !important;
+  color: var(--gold) !important;
+  padding: 8px 24px;
+  transition: all 0.3s ease !important;
+}
+.nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+.nav-cta::after { display: none !important; }
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ══════════════════════════════
+   HOME — HERO (full photo)
+══════════════════════════════ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+.hero-photo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: brightness(0.75) contrast(1.08);
+  transform: scale(1.04);
+  animation: heroZoom 12s ease-out forwards;
+}
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.0); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.3) 60%, transparent 100%),
+    linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 50%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 52px 80px;
+  width: 100%;
+  animation: heroFadeUp 1.2s ease forwards;
+  animation-delay: 0.3s;
+  opacity: 0;
+}
+@keyframes heroFadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.hero-eyebrow {
+  font-size: 10px; letter-spacing: 5px; color: var(--gold);
+  font-weight: 500; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(56px, 8vw, 100px);
+  font-weight: 300; line-height: 1.0;
+  color: var(--white); margin-bottom: 10px;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-family: var(--font-body); font-size: 11px;
+  letter-spacing: 5px; color: var(--gold-pale);
+  margin-bottom: 32px; font-weight: 400;
+}
+.hero-desc {
+  font-size: 14px; line-height: 1.9; color: var(--gray-2);
+  max-width: 520px; margin-bottom: 44px;
+}
+.hero-desc strong { color: var(--cream); font-weight: 500; }
+.hero-ctas { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+.btn-gold {
+  background: var(--gold); color: var(--black);
+  padding: 16px 40px; font-size: 10px; letter-spacing: 3px;
+  font-weight: 700; font-family: var(--font-body);
+  transition: all 0.35s ease; display: inline-block;
+}
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--cream); font-size: 10px; letter-spacing: 3px;
+  font-weight: 500; display: flex; align-items: center; gap: 10px;
+  transition: all 0.3s ease; padding: 16px 0;
+}
+.btn-ghost:hover { color: var(--gold); gap: 16px; }
+.btn-ghost::after { content: '→'; }
+
+/* ── INGREDIENT ANIMATION SECTION ── */
+.ingredient-section {
+  position: relative;
+  background: var(--black);
+  padding: 120px 52px;
+  overflow: hidden;
+  text-align: center;
+}
+.ingredient-section-inner {
+  max-width: 1200px; margin: 0 auto;
+}
+.ingredient-title {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 300; color: var(--white);
+  margin-bottom: 16px; line-height: 1.1;
+}
+.ingredient-title em { font-style: italic; color: var(--gold); }
+.ingredient-subtitle {
+  font-size: 13px; color: var(--gray-2); max-width: 480px;
+  margin: 0 auto 80px; line-height: 1.8;
+}
+
+/* Canvas animation stage */
+.anim-stage {
+  position: relative;
+  width: 100%; max-width: 700px;
+  height: 500px;
+  margin: 0 auto 60px;
+}
+#ingredientCanvas {
+  width: 100%; height: 100%;
+  display: block;
+}
+.anim-controls {
+  display: flex; gap: 16px; justify-content: center; margin-bottom: 48px;
+}
+.anim-btn {
+  padding: 10px 28px;
+  font-size: 10px; letter-spacing: 3px; font-weight: 600;
+  font-family: var(--font-body);
+  transition: all 0.3s ease;
+}
+.anim-btn-primary {
+  background: var(--gold); color: var(--black);
+}
+.anim-btn-primary:hover { background: var(--gold-light); }
+.anim-btn-outline {
+  border: 1px solid rgba(201,168,76,0.4);
+  color: var(--gold);
+}
+.anim-btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+.ingredient-tags {
+  display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+  max-width: 600px; margin: 0 auto;
+}
+.ing-tag {
+  padding: 8px 18px;
+  font-size: 10px; letter-spacing: 2px;
+  border: 1px solid rgba(201,168,76,0.2);
+  color: var(--gray-2);
+  font-family: var(--font-body);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+.ing-tag:hover { border-color: var(--gold); color: var(--gold); }
+.ing-tag.active-ing { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  background: var(--black-soft);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+}
+.philosophy-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(3,1fr);
+  padding: 0 52px;
+}
+.phil-item {
+  padding: 72px 48px; border-right: 1px solid rgba(201,168,76,0.1);
+  position: relative;
+}
+.phil-item:last-child { border-right: none; }
+.phil-item::before {
+  content: ''; position: absolute;
+  top: 0; left: 48px; width: 28px; height: 2px;
+  background: var(--gold);
+}
+.phil-num {
+  font-family: var(--font-display); font-size: 80px;
+  font-weight: 300; color: rgba(201,168,76,0.07);
+  line-height: 1; margin-bottom: -24px;
+}
+.phil-title {
+  font-family: var(--font-display); font-size: 26px;
+  color: var(--gold); font-style: italic; margin-bottom: 14px;
+}
+.phil-text { font-size: 13px; line-height: 1.8; color: var(--gray-1); }
+
+/* ── STATS ── */
+.stats-bar {
+  border-top: 1px solid rgba(201,168,76,0.1);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  padding: 56px 52px;
+}
+.stats-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4,1fr);
+}
+.stat { padding: 0 40px; border-right: 1px solid rgba(201,168,76,0.1); }
+.stat:first-child { padding-left: 0; }
+.stat:last-child { border-right: none; }
+.stat-n {
+  font-family: var(--font-display); font-size: 48px;
+  color: var(--gold); font-weight: 300; line-height: 1; margin-bottom: 6px;
+}
+.stat-l { font-size: 10px; letter-spacing: 2px; color: var(--gray-1); }
+
+/* ── WAITLIST BAND ── */
+.waitlist-band {
+  background: linear-gradient(135deg, var(--black-soft), #1A160A);
+  border: 1px solid rgba(201,168,76,0.18);
+  max-width: 1200px; margin: 0 auto;
+  padding: 80px; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center;
+}
+.wl-title {
+  font-family: var(--font-display);
+  font-size: clamp(30px,4vw,50px);
+  font-weight: 300; color: var(--white); line-height: 1.15;
+}
+.wl-title em { font-style: italic; color: var(--gold); }
+.wl-body { font-size: 13px; color: var(--gray-2); line-height: 1.9; margin-top: 16px; }
+.wl-form { display: flex; flex-direction: column; gap: 14px; }
+.wl-form input {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 15px 18px; color: var(--cream);
+  font-family: var(--font-body); font-size: 13px;
+  outline: none; transition: all 0.3s ease;
+}
+.wl-form input:focus { border-color: var(--gold); background: rgba(201,168,76,0.03); }
+.wl-form input::placeholder { color: var(--gray-1); }
+.wl-form input[type=submit] {
+  background: var(--gold); color: var(--black);
+  font-weight: 700; letter-spacing: 3px; font-size: 10px;
+  cursor: pointer; padding: 18px;
+}
+.wl-form input[type=submit]:hover { background: var(--gold-light); }
+.wl-note { font-size: 10px; color: var(--gray-1); letter-spacing: 1px; }
+
+/* ── PRODUCTS PAGE ── */
+.page-hero {
+  padding: calc(var(--nav-h) + 80px) 52px 60px;
+  max-width: 1200px; margin: 0 auto;
+}
+.section-label {
+  font-size: 10px; letter-spacing: 5px; color: var(--gold);
+  font-weight: 500; margin-bottom: 18px;
+  display: flex; align-items: center; gap: 16px;
+}
+.section-label::before {
+  content: ''; display: block; width: 30px; height: 1px; background: var(--gold);
+}
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px,6vw,80px);
+  font-weight: 300; color: var(--white);
+  line-height: 1.05; margin-bottom: 20px;
+}
+.page-title em { font-style: italic; color: var(--gold); }
+.page-body {
+  font-size: 14px; line-height: 1.9;
+  color: var(--gray-2); max-width: 560px;
+}
+.product-grid {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 52px 80px;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 2px;
+}
+.prod-card {
+  background: var(--black-soft);
+  transition: transform 0.4s var(--ease);
+}
+.prod-card:hover { transform: translateY(-5px); }
+.prod-photo {
+  height: 260px; overflow: hidden; position: relative;
+  background: var(--black-mid);
+  display: flex; align-items: center; justify-content: center;
+}
+.prod-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center 25%;
+  transition: transform 0.6s ease;
+}
+.prod-card:hover .prod-photo img { transform: scale(1.04); }
+.prod-photo-placeholder {
+  display: flex; align-items: center; justify-content: center;
+  height: 100%; width: 100%;
+}
+.jar-mockup {
+  width: 100px; height: 100px; border-radius: 50% 50% 45% 45%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 11px;
+  letter-spacing: 1px; color: rgba(255,255,255,0.6);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.prod-accent { height: 3px; width: 100%; }
+.prod-body { padding: 36px; }
+.prod-sku { font-size: 10px; letter-spacing: 4px; margin-bottom: 16px; font-weight: 500; }
+.prod-name {
+  font-family: var(--font-display); font-size: 26px;
+  color: var(--white); line-height: 1.2; margin-bottom: 8px;
+}
+.prod-tag {
+  font-family: var(--font-display); font-style: italic;
+  font-size: 14px; margin-bottom: 20px;
+}
+.prod-desc { font-size: 13px; line-height: 1.8; color: var(--gray-1); margin-bottom: 28px; }
+.prod-ings { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; margin-bottom: 24px; }
+.prod-ings-lbl { font-size: 9px; letter-spacing: 3px; color: var(--gray-1); margin-bottom: 10px; }
+.ing-chip {
+  display: inline-block; font-size: 10px; letter-spacing: 1px;
+  padding: 4px 9px; margin: 2px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07); color: var(--gray-2);
+}
+.prod-price {
+  font-family: var(--font-display); font-size: 30px;
+  color: var(--gold); font-weight: 300;
+}
+.prod-price span {
+  font-family: var(--font-body); font-size: 10px;
+  letter-spacing: 2px; color: var(--gray-1); margin-left: 8px;
+}
+
+/* ── ABOUT PAGE ── */
+.about-hero {
+  min-height: 55vh; position: relative;
+  display: flex; align-items: flex-end;
+  padding: calc(var(--nav-h) + 80px) 52px 80px;
+  overflow: hidden;
+}
+.about-hero-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 80% at 80% 40%, rgba(201,168,76,0.07), transparent 60%);
+}
+.about-grid {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 52px 80px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.story-label {
+  font-size: 10px; letter-spacing: 5px; color: var(--gold);
+  font-weight: 500; margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.story-label::before { content:''; width:30px; height:1px; background:var(--gold); display:block; }
+.story h2 {
+  font-family: var(--font-display); font-size: 40px;
+  font-weight: 300; color: var(--white);
+  line-height: 1.2; margin-bottom: 28px;
+}
+.story h2 em { font-style: italic; color: var(--gold); }
+.story p { font-size: 14px; line-height: 1.9; color: var(--gray-2); margin-bottom: 18px; }
+.story p strong { color: var(--cream); font-weight: 500; }
+.values { padding-top: 60px; }
+.val { padding: 28px 0; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.val:first-child { border-top: 1px solid rgba(201,168,76,0.1); }
+.val-n { font-family: var(--font-display); font-size: 11px; color: var(--gold); letter-spacing: 3px; margin-bottom: 10px; font-style: italic; }
+.val-t { font-family: var(--font-display); font-size: 20px; color: var(--white); margin-bottom: 8px; }
+.val-b { font-size: 13px; line-height: 1.8; color: var(--gray-1); }
+
+.science-strip {
+  background: var(--black-soft);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  border-bottom: 1px solid rgba(201,168,76,0.12);
+  padding: 80px 52px;
+}
+.sci-inner { max-width: 1200px; margin: 0 auto; }
+.sci-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 0; margin-top: 56px;
+}
+.sci-item { padding: 0 36px; border-right: 1px solid rgba(201,168,76,0.08); }
+.sci-item:first-child { padding-left: 0; }
+.sci-item:last-child { border-right: none; }
+.sci-icon { font-family: var(--font-display); font-size: 34px; color: var(--gold); margin-bottom: 14px; font-style: italic; }
+.sci-t { font-family: var(--font-display); font-size: 17px; color: var(--cream); margin-bottom: 8px; }
+.sci-b { font-size: 12px; line-height: 1.8; color: var(--gray-1); }
+
+.comm-section {
+  max-width: 1200px; margin: 0 auto; padding: 80px 52px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.comm-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.comm-stat {
+  background: var(--black-soft); padding: 40px;
+  text-align: center;
+}
+.cs-n {
+  font-family: var(--font-display); font-size: 48px;
+  color: var(--gold); font-weight: 300; line-height: 1; margin-bottom: 6px;
+}
+.cs-l { font-size: 10px; letter-spacing: 2px; color: var(--gray-1); }
+
+/* ── CONTACT PAGE ── */
+.contact-hero {
+  padding: calc(var(--nav-h) + 80px) 52px 60px;
+  max-width: 1200px; margin: 0 auto;
+}
+.contact-grid {
+  max-width: 1200px; margin: 0 auto;
+  padding: 0 52px 120px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+}
+.contact-block { margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid rgba(201,168,76,0.1); }
+.contact-block:last-child { border-bottom: none; }
+.cb-lbl { font-size: 9px; letter-spacing: 4px; color: var(--gold); font-weight: 500; margin-bottom: 10px; }
+.cb-val { font-family: var(--font-display); font-size: 22px; color: var(--cream); line-height: 1.4; }
+.cb-sub { font-size: 12px; color: var(--gray-1); margin-top: 4px; }
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.18);
+  padding: 15px 18px; color: var(--cream);
+  font-family: var(--font-body); font-size: 13px;
+  outline: none; transition: all 0.3s ease; resize: vertical;
+}
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--gold); }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--gray-1); }
+.contact-form select { appearance: none; cursor: pointer; }
+.contact-form select option { background: var(--black-mid); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.contact-form textarea { min-height: 130px; }
+.contact-submit {
+  background: var(--gold); color: var(--black);
+  padding: 17px; font-family: var(--font-body);
+  font-size: 10px; letter-spacing: 3px; font-weight: 700;
+  border: none; cursor: pointer; transition: all 0.3s ease; width: 100%;
+}
+.contact-submit:hover { background: var(--gold-light); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black-soft);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  padding: 72px 52px 36px;
+}
+.footer-inner { max-width: 1200px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px; margin-bottom: 56px;
+}
+.footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.footer-turtle { width: 36px; height: 36px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(201,168,76,0.4)); }
+.footer-brand-name { font-family: var(--font-body); font-weight: 700; font-size: 12px; letter-spacing: 4px; color: var(--white); }
+.footer-brand-tag { font-family: var(--font-display); font-style: italic; font-size: 11px; color: var(--gold); }
+.footer-desc { font-size: 12px; line-height: 1.8; color: var(--gray-1); max-width: 260px; margin-top: 4px; }
+.footer-col-title { font-size: 9px; letter-spacing: 3px; color: var(--gold); font-weight: 600; margin-bottom: 18px; }
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 12px; color: var(--gray-1);
+  transition: all 0.3s ease; cursor: pointer; display: inline-block;
+}
+.footer-links a:hover { color: var(--gold); padding-left: 4px; }
+.footer-bottom {
+  border-top: 1px solid rgba(201,168,76,0.08);
+  padding-top: 28px; display: flex;
+  justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 11px; color: var(--gray-1); letter-spacing: 1px; }
+.footer-social { display: flex; gap: 24px; }
+.footer-social a { font-size: 10px; letter-spacing: 3px; color: var(--gray-1); transition: color 0.3s; }
+.footer-social a:hover { color: var(--gold); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.88);
+  backdrop-filter: blur(10px);
+  z-index: 2000; display: flex;
+  align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--black-soft);
+  border: 1px solid rgba(201,168,76,0.22);
+  max-width: 500px; width: 90%; padding: 56px 48px;
+  position: relative; transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute; top: 18px; right: 22px;
+  font-size: 18px; color: var(--gray-1); cursor: pointer;
+  background: none; border: none; transition: color 0.3s;
+}
+.modal-close:hover { color: var(--gold); }
+.modal-eye { font-size: 9px; letter-spacing: 4px; color: var(--gold); margin-bottom: 14px; }
+.modal-title {
+  font-family: var(--font-display); font-size: 34px;
+  font-weight: 300; color: var(--white); line-height: 1.2; margin-bottom: 10px;
+}
+.modal-title em { font-style: italic; color: var(--gold); }
+.modal-body { font-size: 13px; color: var(--gray-2); line-height: 1.8; margin-bottom: 28px; }
+.modal-form { display: flex; flex-direction: column; gap: 12px; }
+.modal-form input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.18);
+  padding: 14px 16px; color: var(--cream);
+  font-family: var(--font-body); font-size: 13px;
+  outline: none; transition: all 0.3s ease;
+}
+.modal-form input:focus { border-color: var(--gold); }
+.modal-form input::placeholder { color: var(--gray-1); }
+.modal-submit {
+  background: var(--gold); color: var(--black);
+  padding: 15px; font-family: var(--font-body);
+  font-size: 10px; letter-spacing: 3px; font-weight: 700;
+  border: none; cursor: pointer; transition: background 0.3s;
+}
+.modal-submit:hover { background: var(--gold-light); }
+.success-msg { display: none; text-align: center; padding: 16px 0; }
+.success-msg.show { display: block; }
+.success-icon { font-size: 44px; margin-bottom: 14px; }
+.success-t {
+  font-family: var(--font-display); font-size: 24px;
+  color: var(--white); margin-bottom: 6px;
+}
+.success-s { font-size: 13px; color: var(--gray-1); }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── SECTION WRAPPERS ── */
+.section-pad { padding: 0 52px 120px; max-width: 1200px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-brand">
+    <img src="logo.png" class="nav-turtle" alt="St. Pete Tallow">
+    <div class="nav-wordmark">
+      <div class="nav-main">ST. PETE TALLOW</div>
+      <div class="nav-sub">Ancestral Luxury Skincare</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="go('home')">Home</a></li>
+    <li><a href="#" onclick="go('products')">Products</a></li>
+    <li><a href="#" onclick="go('about')">Our Story</a></li>
+    <li><a href="#" onclick="go('contact')">Contact</a></li>
+    <li><a href="#" class="nav-cta" onclick="openModal()">JOIN WAITLIST</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════ HOME ══════════════════════════════ -->
+<div id="home" class="page active">
+
+  <!-- Hero — full photo -->
+  <section class="hero">
+    <img src="jar.jpg" class="hero-photo" alt="The Golden Hour Whip">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">ANCESTRAL LUXURY SKINCARE · ST. PETERSBURG, FL</div>
+      <h1 class="hero-title">
+        Bio-Identical.<br>
+        <em>Waterless.</em><br>
+        Performance.
+      </h1>
+      <div class="hero-sub">ST. PETE TALLOW · MADE FOR THE COASTAL ATHLETE</div>
+      <p class="hero-desc">
+        We engineered a 100% waterless skincare line built on the most
+        <strong>bio-identical lipid on earth</strong> — pure, grass-fed tallow combined
+        with clinical-grade actives. For the athlete who lives, trains, and recovers outside.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn-gold" href="#" onclick="go('products')">EXPLORE THE LINE</a>
+        <a class="btn-ghost" href="#" onclick="openModal()">JOIN THE WAITLIST</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat reveal"><div class="stat-n">100%</div><div class="stat-l">WATERLESS FORMULAS</div></div>
+      <div class="stat reveal"><div class="stat-n">3</div><div class="stat-l">CLINICAL SKUs</div></div>
+      <div class="stat reveal"><div class="stat-n">3,200+</div><div class="stat-l">COMMUNITY MEMBERS</div></div>
+      <div class="stat reveal"><div class="stat-n">$0</div><div class="stat-l">SYNTHETIC FILLERS</div></div>
+    </div>
+  </div>
+
+  <!-- Ingredient Animation Section -->
+  <div class="ingredient-section">
+    <div class="ingredient-section-inner">
+      <div class="section-label" style="justify-content:center;">THE FORMULA</div>
+      <h2 class="ingredient-title reveal">Every ingredient <em>earns its place.</em></h2>
+      <p class="ingredient-subtitle reveal">Five bio-compatible actives. Zero fillers. Watch them come together.</p>
+
+      <div class="anim-stage reveal">
+        <canvas id="ingredientCanvas" width="700" height="500"></canvas>
+      </div>
+
+      <div class="anim-controls reveal">
+        <button class="anim-btn anim-btn-primary" onclick="animAssemble()">ASSEMBLE THE FORMULA</button>
+        <button class="anim-btn anim-btn-outline" onclick="animDissolve()">DISSOLVE TO INGREDIENTS</button>
+      </div>
+
+      <div class="ingredient-tags reveal">
+        <div class="ing-tag" id="tag-tallow">Grass-Fed Tallow</div>
+        <div class="ing-tag" id="tag-jojoba">Golden Jojoba</div>
+        <div class="ing-tag" id="tag-rosehip">Cold-Pressed Rosehip</div>
+        <div class="ing-tag" id="tag-raspberry">Red Raspberry Seed</div>
+        <div class="ing-tag" id="tag-neroli">Neroli Blossom</div>
+        <div class="ing-tag" id="tag-frankincense">Frankincense</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Philosophy -->
+  <div class="philosophy">
+    <div class="philosophy-inner">
+      <div class="phil-item reveal">
+        <div class="phil-num">01</div>
+        <div class="phil-title">Ancestral</div>
+        <p class="phil-text">Tallow is the oldest skincare ingredient on earth. Our ancestors protected their skin with rendered fat for thousands of years. We didn't invent this — we refined it into something worthy of the modern coastal lifestyle.</p>
+      </div>
+      <div class="phil-item reveal">
+        <div class="phil-num">02</div>
+        <div class="phil-title">Waterless</div>
+        <p class="phil-text">No water. No filler. No ingredient that doesn't earn its place. Every gram is purposeful. Our formulas don't evaporate in the Florida sun — they absorb, protect, and repair all day long.</p>
+      </div>
+      <div class="phil-item reveal">
+        <div class="phil-num">03</div>
+        <div class="phil-title">Luxury</div>
+        <p class="phil-text">Aesop-level aesthetics backed by primal, high-performance chemistry. We are not selling beef fat. We are selling bio-hacking for the skin barrier — in a jar worthy of your bathroom shelf.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Home Waitlist -->
+  <div style="padding:100px 52px;">
+    <div class="waitlist-band reveal">
+      <div>
+        <h2 class="wl-title">Be First.<br><em>Be Golden.</em></h2>
+        <p class="wl-body">St. Pete Tallow launches exclusively to our coastal community first. Join the waitlist for your batch notification and founding member pricing.</p>
+      </div>
+      <form class="wl-form" onsubmit="handleWL(event)">
+        <input type="text" placeholder="YOUR FULL NAME" required>
+        <input type="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input type="text" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
+        <input type="submit" value="JOIN THE FOUNDING WAITLIST">
+        <p class="wl-note">No spam. Batch notifications only. 🐢</p>
+      </form>
+    </div>
+  </div>
+
+</div><!-- /home -->
+
+<!-- ══════════════════════════════ PRODUCTS ══════════════════════════════ -->
+<div id="products" class="page">
+  <div class="page-hero">
+    <div class="section-label">THE LINE</div>
+    <h1 class="page-title">Three SKUs.<br><em>One Philosophy.</em></h1>
+    <p class="page-body">Every product shares the same bio-identical tallow base. What changes is the active phase — engineered for three distinct performance moments in the coastal athlete's day.</p>
+  </div>
+
+  <div class="product-grid">
+    <!-- SKU 003 HERO -->
+    <div class="prod-card reveal">
+      <div class="prod-photo">
+        <img src="jar.jpg" alt="The Golden Hour Whip">
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(10,10,10,0.45) 100%);"></div>
+      </div>
+      <div class="prod-accent" style="background:var(--gold);"></div>
+      <div class="prod-body">
+        <div class="prod-sku" style="color:var(--gold);">SKU 003 · HERO PRODUCT</div>
+        <h2 class="prod-name">The Golden Hour Whip</h2>
+        <p class="prod-tag" style="color:var(--gold);">Daily facial moisturizer. Weightless cellular repair.</p>
+        <p class="prod-desc">A fluffy, pale-gold buttercream soufflé with zero wax and zero water. Five bio-compatible actives that absorb in seconds and leave absolutely no residue.</p>
+        <div class="prod-ings">
+          <div class="prod-ings-lbl">KEY ACTIVES</div>
+          <span class="ing-chip">Grass-Fed Tallow</span>
+          <span class="ing-chip">Rosehip Seed Oil</span>
+          <span class="ing-chip">Red Raspberry Seed</span>
+          <span class="ing-chip">Neroli EO</span>
+          <span class="ing-chip">Frankincense EO</span>
+        </div>
+        <div class="prod-price">$42.50 <span>2OZ · FROSTED WHITE JAR</span></div>
+      </div>
+    </div>
+
+    <!-- SKU 001 -->
+    <div class="prod-card reveal" style="animation-delay:0.12s;">
+      <div class="prod-photo">
+        <div class="prod-photo-placeholder">
+          <div class="jar-mockup" style="background:radial-gradient(circle at 35% 30%,#A8C4A8,#7A9E7E);width:110px;height:110px;">
+            <span style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.7);">SAGE</span>
+          </div>
+        </div>
+      </div>
+      <div class="prod-accent" style="background:var(--sage);"></div>
+      <div class="prod-body">
+        <div class="prod-sku" style="color:var(--sage);">SKU 001 · POST-RECOVERY</div>
+        <h2 class="prod-name">Suncoast Sage Balm</h2>
+        <p class="prod-tag" style="color:var(--sage);">Post-sun skin armor. For after the salt and wind.</p>
+        <p class="prod-desc">A rich, water-resistant salve engineered for the coastal athlete. Sarasota beeswax creates waterproof environmental armor while rosehip supports post-UV cellular renewal.</p>
+        <div class="prod-ings">
+          <div class="prod-ings-lbl">KEY ACTIVES</div>
+          <span class="ing-chip">Grass-Fed Tallow</span>
+          <span class="ing-chip">Sarasota Beeswax</span>
+          <span class="ing-chip">Cold-Pressed Rosehip</span>
+          <span class="ing-chip">Clary Sage EO</span>
+          <span class="ing-chip">Lavender EO</span>
+        </div>
+        <div class="prod-price">$42.50 <span>2OZ · FROSTED SAGE JAR</span></div>
+      </div>
+    </div>
+
+    <!-- SKU 002 -->
+    <div class="prod-card reveal" style="animation-delay:0.24s;">
+      <div class="prod-photo">
+        <div class="prod-photo-placeholder">
+          <div class="jar-mockup" style="background:radial-gradient(circle at 35% 30%,#4A7AB8,#1B4F8A);width:110px;height:110px;">
+            <span style="font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.7);">TANSY</span>
+          </div>
+        </div>
+      </div>
+      <div class="prod-accent" style="background:var(--cobalt);"></div>
+      <div class="prod-body">
+        <div class="prod-sku" style="color:#6B9FD4;">SKU 002 · CLINICAL RECOVERY</div>
+        <h2 class="prod-name">Deep Water Tansy Rub</h2>
+        <p class="prod-tag" style="color:#6B9FD4;">Ice and fire for muscles that earned it.</p>
+        <p class="prod-desc">Clinical-grade recovery butter powered by the most potent natural anti-inflammatory trio available. The cobalt blue jar mirrors the rare azulene compound inside.</p>
+        <div class="prod-ings">
+          <div class="prod-ings-lbl">KEY ACTIVES</div>
+          <span class="ing-chip">Grass-Fed Tallow</span>
+          <span class="ing-chip">Blue Tansy Azulene</span>
+          <span class="ing-chip">Peppermint Menthol</span>
+          <span class="ing-chip">Frankincense</span>
+          <span class="ing-chip">Elevated Jojoba</span>
+        </div>
+        <div class="prod-price">$42.50 <span>2OZ · COBALT BLUE JAR</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products waitlist -->
+  <div style="padding:0 52px 100px;">
+    <div class="waitlist-band reveal">
+      <div>
+        <h2 class="wl-title"><em>Not Available Yet.</em><br>But You Can Be First.</h2>
+        <p class="wl-body">All three SKUs are in final production. Join the founding waitlist to secure your jars at launch with exclusive founder pricing.</p>
+      </div>
+      <form class="wl-form" onsubmit="handleWL(event)">
+        <input type="text" placeholder="YOUR FULL NAME" required>
+        <input type="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input type="text" placeholder="WHICH PRODUCT INTERESTS YOU MOST?">
+        <input type="submit" value="SECURE MY SPOT">
+        <p class="wl-note">First batch. Founding pricing. St. Pete only.</p>
+      </form>
+    </div>
+  </div>
+</div><!-- /products -->
+
+<!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
+<div id="about" class="page">
+  <div class="about-hero">
+    <div class="about-hero-glow"></div>
+    <div style="position:relative;z-index:2;max-width:1200px;margin:0 auto;width:100%;">
+      <div class="section-label">OUR STORY</div>
+      <h1 class="page-title" style="max-width:700px;">Built on a Beach.<br><em>Proven in the Sun.</em></h1>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="story reveal">
+      <div class="story-label">THE ORIGIN</div>
+      <h2>The product that <em>didn't exist</em> — so we built it.</h2>
+      <p>St. Pete Tallow doesn't start in a laboratory. It starts on a volleyball court — on the white sand beaches of St. Petersburg, Florida, under a sun that doesn't negotiate.</p>
+      <p>Our founder spent his days exactly like his customers do: outside, active, alive. Playing beach volleyball, building community, logging hours in salt air and Gulf heat that most skincare products were never designed to survive.</p>
+      <p>He was using whatever was on the drugstore shelf — <strong>water-based lotions that evaporated before noon</strong>, leaving skin dry, cracked, and peeling by the end of the workday. Then a coworker handed him a homemade tallow balm. He was skeptical. He tried it anyway.</p>
+      <p>It worked. Better than anything he'd ever used. But it was heavy, greasy, and waxy. <strong>The right ingredient in the wrong formula.</strong></p>
+      <p>So he did what founders do: he didn't go looking for a better product. He built one — engineered for the community he'd already spent a year building on the sand.</p>
+    </div>
+    <div class="values reveal">
+      <div class="val">
+        <div class="val-n">01 · COMMUNITY</div>
+        <div class="val-t">The St. Pete Ballers Club</div>
+        <p class="val-b">Over 3,200 coastal athletes. A private WhatsApp network of 600 direct members. Built around beach volleyball, physical wellness, and the social connection that happens when people move their bodies outdoors together.</p>
+      </div>
+      <div class="val">
+        <div class="val-n">02 · SCIENCE</div>
+        <div class="val-t">Bio-Identical by Design</div>
+        <p class="val-b">Tallow's fatty acid profile mirrors human sebum more closely than any plant oil on earth. We combine this ancestral base with clinical-grade actives — cold-pressed, GC/MS verified, and IFRA compliant.</p>
+      </div>
+      <div class="val">
+        <div class="val-n">03 · INTEGRITY</div>
+        <div class="val-t">Every Ingredient Earns Its Place</div>
+        <p class="val-b">Zero water. Zero filler. Zero synthetic silicones. Local St. Pete tallow. Sarasota beeswax. GC/MS tested essential oils. If it doesn't serve the skin, it doesn't make the formula.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Science strip -->
+  <div class="science-strip">
+    <div class="sci-inner">
+      <div class="section-label">THE SCIENCE</div>
+      <h2 class="page-title" style="font-size:clamp(36px,4vw,56px);max-width:440px;">Why Tallow <em>Works</em></h2>
+      <div class="sci-grid">
+        <div class="sci-item reveal"><div class="sci-icon">λ</div><div class="sci-t">Bio-Identical Lipids</div><p class="sci-b">Tallow's oleic, palmitic, and stearic acids mirror human sebum. The skin doesn't have to work to absorb it — it already speaks the language.</p></div>
+        <div class="sci-item reveal"><div class="sci-icon">α</div><div class="sci-t">CLA Rich</div><p class="sci-b">Grass-fed tallow is dense in Conjugated Linoleic Acid — documented anti-inflammatory and skin-barrier-strengthening properties.</p></div>
+        <div class="sci-item reveal"><div class="sci-icon">Ω</div><div class="sci-t">Fat-Soluble Vitamins</div><p class="sci-b">Vitamins A, D, E, and K delivered in their most bioavailable form — exactly what skin cells require for repair and regeneration.</p></div>
+        <div class="sci-item reveal"><div class="sci-icon">∅</div><div class="sci-t">Zero Dilution</div><p class="sci-b">Water-based products dilute every active. Our waterless formulas deliver 100% of every active directly — no dilution, no evaporation.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Community stats -->
+  <div class="comm-section">
+    <div class="reveal">
+      <div class="section-label">THE COMMUNITY</div>
+      <h2 class="page-title" style="font-size:clamp(36px,4vw,56px);">Our Unfair <em>Advantage</em></h2>
+      <p class="page-body" style="margin-bottom:16px;">Most consumer brands spend $30–80 to acquire a single customer. We drop a voice note into a WhatsApp chat and sell out in 10 minutes.</p>
+      <p class="page-body">That's not marketing. That's community.</p>
+    </div>
+    <div class="comm-stats reveal">
+      <div class="comm-stat"><div class="cs-n">3,200+</div><div class="cs-l">INSTAGRAM FOLLOWERS</div></div>
+      <div class="comm-stat"><div class="cs-n">600</div><div class="cs-l">WHATSAPP MEMBERS</div></div>
+      <div class="comm-stat"><div class="cs-n">$0</div><div class="cs-l">ACQUISITION COST</div></div>
+      <div class="comm-stat"><div class="cs-n">10min</div><div class="cs-l">TO SELL OUT A BATCH</div></div>
+    </div>
+  </div>
+</div><!-- /about -->
+
+<!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
+<div id="contact" class="page">
+  <div class="contact-hero">
+    <div class="section-label">GET IN TOUCH</div>
+    <h1 class="page-title">Let's <em>Connect</em></h1>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-block"><div class="cb-lbl">EMAIL</div><div class="cb-val">stpetetallow@gmail.com</div><div class="cb-sub">General inquiries & wholesale partnerships</div></div>
+      <div class="contact-block"><div class="cb-lbl">INSTAGRAM</div><div class="cb-val">@stpetetallow</div><div class="cb-sub">Follow for batch drop announcements</div></div>
+      <div class="contact-block"><div class="cb-lbl">WEBSITE</div><div class="cb-val">www.stpetetallow.com</div><div class="cb-sub">St. Petersburg, Florida</div></div>
+      <div class="contact-block"><div class="cb-lbl">WHOLESALE</div><div class="cb-val" style="font-size:16px;line-height:1.6;">MedSpas · Luxury Gyms<br>Coastal Resorts · Boutique Wellness</div><div class="cb-sub">Minimum first order: 12 jars · Mix & match SKUs</div></div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleContact(event)">
+      <div class="form-row">
+        <input type="text" placeholder="FIRST NAME" required>
+        <input type="text" placeholder="LAST NAME" required>
+      </div>
+      <input type="email" placeholder="EMAIL ADDRESS" required>
+      <input type="text" placeholder="COMPANY / BUSINESS (OPTIONAL)">
+      <select><option value="" disabled selected>INQUIRY TYPE</option><option>Product Waitlist</option><option>Wholesale Partnership</option><option>Press & Media</option><option>General Inquiry</option></select>
+      <textarea placeholder="YOUR MESSAGE..."></textarea>
+      <button type="submit" class="contact-submit">SEND MESSAGE</button>
+    </form>
+  </div>
+</div><!-- /contact -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <img src="logo.png" class="footer-turtle" alt="St. Pete Tallow">
+          <div>
+            <div class="footer-brand-name">ST. PETE TALLOW</div>
+            <div class="footer-brand-tag">Ancestral Luxury Skincare</div>
+          </div>
+        </div>
+        <p class="footer-desc">100% waterless, bio-identical skincare engineered for the modern coastal athlete. Made in St. Petersburg, Florida.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">EXPLORE</div>
+        <ul class="footer-links">
+          <li><a onclick="go('home')">Home</a></li>
+          <li><a onclick="go('products')">The Products</a></li>
+          <li><a onclick="go('about')">Our Story</a></li>
+          <li><a onclick="go('contact')">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">PRODUCTS</div>
+        <ul class="footer-links">
+          <li><a onclick="go('products')">Golden Hour Whip</a></li>
+          <li><a onclick="go('products')">Suncoast Sage Balm</a></li>
+          <li><a onclick="go('products')">Deep Water Tansy Rub</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">CONNECT</div>
+        <ul class="footer-links">
+          <li><a href="mailto:stpetetallow@gmail.com">stpetetallow@gmail.com</a></li>
+          <li><a href="https://instagram.com/stpetetallow" target="_blank">@stpetetallow</a></li>
+          <li><a onclick="openModal()">Join the Waitlist</a></li>
+          <li><a onclick="go('contact')">Wholesale Inquiries</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 St. Pete Tallow · St. Petersburg, Florida · All Rights Reserved</div>
+      <div class="footer-social">
+        <a href="https://instagram.com/stpetetallow" target="_blank">INSTAGRAM</a>
+        <a href="mailto:stpetetallow@gmail.com">EMAIL</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeOut(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="mForm">
+      <div class="modal-eye">FOUNDING MEMBER WAITLIST</div>
+      <h2 class="modal-title">Be <em>Golden.</em><br>Be First.</h2>
+      <p class="modal-body">St. Pete Tallow's first batch drops exclusively to our founding community. Join now for your batch notification and founding pricing.</p>
+      <form class="modal-form" onsubmit="handleModal(event)">
+        <input type="text" placeholder="YOUR FULL NAME" required>
+        <input type="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input type="text" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
+        <button type="submit" class="modal-submit">JOIN THE FOUNDING WAITLIST</button>
+      </form>
+      <p style="font-size:11px;color:var(--gray-1);margin-top:10px;letter-spacing:1px;">No spam. Batch notifications only.</p>
+    </div>
+    <div class="success-msg" id="mSuccess">
+      <div class="success-icon">🐢</div>
+      <div class="success-t">You're on the list.</div>
+      <p class="success-s">We'll notify you the moment the first batch drops.<br>Welcome to the St. Pete Tallow founding community.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Routing ───────────────────────────────────────────────────────────────
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(reveal, 120);
+}
+
+// ── Nav scroll ────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+  reveal();
+});
+
+// ── Reveal ────────────────────────────────────────────────────────────────
+function reveal() {
+  document.querySelectorAll('.page.active .reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 80)
+      el.classList.add('visible');
+  });
+}
+window.addEventListener('load', () => setTimeout(reveal, 200));
+
+// ── Modal ─────────────────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeOut(e) { if (e.target.id === 'modal') closeModal(); }
+function handleModal(e) {
+  e.preventDefault();
+  document.getElementById('mForm').style.display = 'none';
+  document.getElementById('mSuccess').classList.add('show');
+  setTimeout(closeModal, 3200);
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+// ── Form handlers ─────────────────────────────────────────────────────────
+function handleWL(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('input[type=submit]');
+  btn.value = '🐢  YOU'RE ON THE LIST'; btn.style.background='#2D5A2D'; btn.style.color='#fff'; btn.disabled=true;
+}
+function handleContact(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.contact-submit');
+  btn.textContent='MESSAGE SENT — WE'LL BE IN TOUCH'; btn.style.background='#2D5A2D'; btn.style.color='#fff'; btn.disabled=true;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// INGREDIENT ANIMATION
+// ══════════════════════════════════════════════════════════════════════════
+const canvas = document.getElementById('ingredientCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = 700; canvas.height = 500;
+
+const CX = canvas.width / 2;
+const CY = canvas.height / 2;
+const GOLD = '#C9A84C';
+const CREAM = '#FAF7F0';
+
+const ingredients = [
+  { id:'tallow',        label:'Grass-Fed Tallow',   color:'#E8D4A0', size:52, pct:'78%' },
+  { id:'jojoba',        label:'Golden Jojoba',       color:'#D4C070', size:38, pct:'8%'  },
+  { id:'rosehip',       label:'Cold-Pressed Rosehip',color:'#C85A3A', size:36, pct:'7%'  },
+  { id:'raspberry',     label:'Red Raspberry Seed',  color:'#A0302A', size:30, pct:'2%'  },
+  { id:'neroli',        label:'Neroli Blossom',      color:'#F0C84A', size:24, pct:'0.3%'},
+  { id:'frankincense',  label:'Frankincense',        color:'#C8A050', size:22, pct:'0.3%'},
+];
+
+// Scattered positions (dissolved state)
+const scattered = [
+  {x: 90, y:100}, {x:600, y: 80}, {x: 80, y:380},
+  {x:580, y:400}, {x:180, y:220}, {x:520, y:240},
+];
+
+// Center cluster (assembled state)
+const assembled = [
+  {x: CX,     y: CY     },
+  {x: CX-70,  y: CY-50  },
+  {x: CX+70,  y: CY-50  },
+  {x: CX-60,  y: CY+60  },
+  {x: CX+60,  y: CY+60  },
+  {x: CX,     y: CY-90  },
+];
+
+let particles = ingredients.map((ing, i) => ({
+  ...ing,
+  x: scattered[i].x,
+  y: scattered[i].y,
+  tx: scattered[i].x,
+  ty: scattered[i].y,
+  alpha: 1,
+  scale: 1,
+  vx: 0, vy: 0,
+  angle: Math.random() * Math.PI * 2,
+  spin: (Math.random() - 0.5) * 0.02,
+}));
+
+let animState = 'scattered'; // 'scattered' | 'assembled' | 'animating'
+let rafId = null;
+let showJar = false;
+let jarAlpha = 0;
+let assembledTimer = 0;
+
+function lerp(a, b, t) { return a + (b - a) * t; }
+function easeInOut(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+function drawParticle(p) {
+  ctx.save();
+  ctx.globalAlpha = p.alpha;
+  ctx.translate(p.x, p.y);
+  ctx.rotate(p.angle);
+
+  // Glow
+  const grd = ctx.createRadialGradient(0, 0, 0, 0, 0, p.size * p.scale * 1.5);
+  grd.addColorStop(0, p.color + 'CC');
+  grd.addColorStop(0.5, p.color + '66');
+  grd.addColorStop(1, p.color + '00');
+  ctx.beginPath();
+  ctx.arc(0, 0, p.size * p.scale * 1.5, 0, Math.PI * 2);
+  ctx.fillStyle = grd;
+  ctx.fill();
+
+  // Core circle
+  ctx.beginPath();
+  ctx.arc(0, 0, p.size * p.scale, 0, Math.PI * 2);
+  ctx.fillStyle = p.color;
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = p.color;
+  ctx.fill();
+
+  // Label (only when scattered)
+  if (animState === 'scattered' && p.alpha > 0.5) {
+    ctx.rotate(-p.angle);
+    ctx.shadowBlur = 0;
+    ctx.font = 'bold 10px Montserrat, sans-serif';
+    ctx.fillStyle = '#ffffff';
+    ctx.textAlign = 'center';
+    ctx.fillText(p.label, 0, p.size * p.scale + 18);
+    ctx.font = '9px Montserrat, sans-serif';
+    ctx.fillStyle = GOLD;
+    ctx.fillText(p.pct, 0, p.size * p.scale + 30);
+  }
+
+  ctx.restore();
+}
+
+function drawJar(alpha) {
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(CX, CY);
+
+  // Jar body
+  const jarW = 110, jarH = 90;
+  const jrd = ctx.createRadialGradient(-20, -20, 10, 0, 0, 80);
+  jrd.addColorStop(0, '#F5EAC8');
+  jrd.addColorStop(0.6, '#E8D4A0');
+  jrd.addColorStop(1, '#C9A84C');
+
+  ctx.beginPath();
+  ctx.ellipse(0, 10, jarW/2, jarH/2, 0, 0, Math.PI*2);
+  ctx.fillStyle = jrd;
+  ctx.shadowBlur = 40;
+  ctx.shadowColor = GOLD;
+  ctx.fill();
+
+  // Lid
+  ctx.beginPath();
+  ctx.ellipse(0, -jarH/2+10, jarW/2+5, 18, 0, 0, Math.PI*2);
+  ctx.fillStyle = '#1A1A1A';
+  ctx.shadowBlur = 0;
+  ctx.fill();
+
+  // Shine
+  ctx.beginPath();
+  ctx.ellipse(-18, -5, 20, 35, -0.3, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,255,255,0.15)';
+  ctx.fill();
+
+  // Label text
+  ctx.font = 'bold 9px Montserrat, sans-serif';
+  ctx.fillStyle = '#0A0A0A';
+  ctx.textAlign = 'center';
+  ctx.fillText('GOLDEN HOUR', 0, 5);
+  ctx.fillText('WHIP', 0, 18);
+
+  ctx.restore();
+}
+
+function tick() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Subtle grid bg
+  ctx.strokeStyle = 'rgba(201,168,76,0.04)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < canvas.width; x += 40) {
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+  }
+  for (let y = 0; y < canvas.height; y += 40) {
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+  }
+
+  // Central glow when assembled
+  if (showJar || jarAlpha > 0) {
+    const cgrd = ctx.createRadialGradient(CX, CY, 0, CX, CY, 180);
+    cgrd.addColorStop(0, `rgba(201,168,76,${0.08 * jarAlpha})`);
+    cgrd.addColorStop(1, 'transparent');
+    ctx.fillStyle = cgrd;
+    ctx.beginPath();
+    ctx.arc(CX, CY, 180, 0, Math.PI*2);
+    ctx.fill();
+  }
+
+  // Update + draw particles
+  particles.forEach((p, i) => {
+    p.angle += p.spin;
+    const speed = 0.055;
+    p.x = lerp(p.x, p.tx, speed);
+    p.y = lerp(p.y, p.ty, speed);
+    drawParticle(p);
+
+    // Activate tag
+    const dist = Math.hypot(p.x - p.tx, p.y - p.ty);
+    const tag = document.getElementById('tag-' + p.id);
+    if (tag) {
+      if (animState === 'assembled' && dist < 5) {
+        tag.classList.add('active-ing');
+      } else {
+        tag.classList.remove('active-ing');
+      }
+    }
+  });
+
+  // Draw jar overlay
+  if (jarAlpha > 0) drawJar(jarAlpha);
+
+  // Jar fade-in logic
+  if (showJar && jarAlpha < 1) jarAlpha = Math.min(1, jarAlpha + 0.018);
+  if (!showJar && jarAlpha > 0) jarAlpha = Math.max(0, jarAlpha - 0.025);
+
+  // Check if assembled
+  if (animState === 'assembling') {
+    const allClose = particles.every(p => Math.hypot(p.x - p.tx, p.y - p.ty) < 8);
+    if (allClose) {
+      animState = 'assembled';
+      showJar = true;
+      assembledTimer = 0;
+    }
+  }
+
+  rafId = requestAnimationFrame(tick);
+}
+
+function animDissolve() {
+  animState = 'dissolving';
+  showJar = false;
+  particles.forEach((p, i) => {
+    p.tx = scattered[i].x;
+    p.ty = scattered[i].y;
+    p.alpha = 1;
+    p.spin = (Math.random()-0.5)*0.03;
+  });
+  setTimeout(() => { animState = 'scattered'; }, 1000);
+}
+
+function animAssemble() {
+  animState = 'assembling';
+  showJar = false;
+  particles.forEach((p, i) => {
+    p.tx = assembled[i].x;
+    p.ty = assembled[i].y;
+    p.spin = (Math.random()-0.5)*0.008;
+  });
+}
+
+// Start animation loop
+tick();
+</script>
+</body>
+</html>
