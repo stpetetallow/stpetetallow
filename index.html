@@ -288,9 +288,12 @@ nav.scrolled {
 
 /* ── STATS ── */
 .stats-bar {
-  border-top: 1px solid rgba(201,168,76,0.1);
-  border-bottom: 1px solid rgba(201,168,76,0.1);
-  padding: 56px 52px;
+  background: rgba(10,10,10,0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(201,168,76,0.12);
+  padding: 40px 52px;
+  margin-top: -1px;
 }
 .stats-inner {
   max-width: 1200px; margin: 0 auto;
@@ -676,17 +679,16 @@ footer {
         <a class="btn-ghost" href="#" onclick="openModal()">JOIN THE WAITLIST</a>
       </div>
     </div>
-  </section>
-
-  <!-- Stats -->
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat reveal"><div class="stat-n">100%</div><div class="stat-l">WATERLESS FORMULAS</div></div>
-      <div class="stat reveal"><div class="stat-n">3</div><div class="stat-l">CLINICAL SKUs</div></div>
-      <div class="stat reveal"><div class="stat-n">3,200+</div><div class="stat-l">COMMUNITY MEMBERS</div></div>
-      <div class="stat reveal"><div class="stat-n">$0</div><div class="stat-l">SYNTHETIC FILLERS</div></div>
+    <!-- Stats overlaid at bottom of hero -->
+    <div class="stats-bar" style="position:absolute;bottom:0;left:0;right:0;width:100%;z-index:3;">
+      <div class="stats-inner">
+        <div class="stat reveal"><div class="stat-n">100%</div><div class="stat-l">WATERLESS FORMULAS</div></div>
+        <div class="stat reveal"><div class="stat-n">3</div><div class="stat-l">CLINICAL SKUs</div></div>
+        <div class="stat reveal"><div class="stat-n">3,200+</div><div class="stat-l">COMMUNITY MEMBERS</div></div>
+        <div class="stat reveal"><div class="stat-n">$0</div><div class="stat-l">SYNTHETIC FILLERS</div></div>
+      </div>
     </div>
-  </div>
+  </section>
 
   <!-- Ingredient Animation Section -->
   <div class="ingredient-section">
@@ -1111,9 +1113,11 @@ function handleContact(e) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════
-// INGREDIENT ANIMATION
+// INGREDIENT ANIMATION — wrapped in load event to ensure DOM is ready
 // ══════════════════════════════════════════════════════════════════════════
+window.addEventListener('load', function() {
 const canvas = document.getElementById('ingredientCanvas');
+if (!canvas) { console.warn('Canvas not found'); return; }
 const ctx = canvas.getContext('2d');
 // Responsive canvas
 const stageEl = document.getElementById('ingredientCanvas');
@@ -1343,6 +1347,7 @@ function animAssemble() {
 
 
 
+
 window.addEventListener('hashchange', function() {
   var hash = window.location.hash.replace('#','') || 'home';
   var valid = ['home','products','about','contact'];
@@ -1367,7 +1372,9 @@ window.addEventListener('load', function() {
       animAssemble();
     }
   }, 2000);
-});
+}); // end window load for routing
+
+}); // end window load for animation
 </script>
 </body>
 </html>
