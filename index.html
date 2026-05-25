@@ -357,9 +357,11 @@ footer { background: var(--black-soft); border-top: 1px solid rgba(201,168,76,0.
     <div class="wl-band reveal">
       <div><h2 class="wl-title">Be First.<br><em>Be Golden.</em></h2><p class="wl-body">St. Pete Tallow launches exclusively to our coastal community first. Join the waitlist for your batch notification and founding member pricing.</p></div>
       <form class="wl-form" onsubmit="handleWL(event)">
-        <input class="wl-input" type="text" placeholder="YOUR FULL NAME" required>
-        <input class="wl-input" type="email" placeholder="YOUR EMAIL ADDRESS" required>
-        <input class="wl-input" type="text" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
+        <input type="hidden" name="_subject" value="New Waitlist Signup (Home Page)">
+        <input type="hidden" name="form_source" value="Home Page Waitlist">
+        <input class="wl-input" type="text" name="full_name" placeholder="YOUR FULL NAME" required>
+        <input class="wl-input" type="email" name="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input class="wl-input" type="text" name="instagram_handle" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
         <button type="submit" class="wl-submit">JOIN THE FOUNDING WAITLIST</button>
         <p class="wl-note">No spam. Batch notifications only. 🐢</p>
       </form>
@@ -442,9 +444,11 @@ footer { background: var(--black-soft); border-top: 1px solid rgba(201,168,76,0.
     <div class="wl-band reveal">
       <div><h2 class="wl-title"><em>Not Available Yet.</em><br>But You Can Be First.</h2><p class="wl-body">All three SKUs are in final production. Join the founding waitlist to secure your jars at launch with exclusive founder pricing.</p></div>
       <form class="wl-form" onsubmit="handleWL(event)">
-        <input class="wl-input" type="text" placeholder="YOUR FULL NAME" required>
-        <input class="wl-input" type="email" placeholder="YOUR EMAIL ADDRESS" required>
-        <input class="wl-input" type="text" placeholder="WHICH PRODUCT INTERESTS YOU?">
+        <input type="hidden" name="_subject" value="New Waitlist Signup (Products Page)">
+        <input type="hidden" name="form_source" value="Products Page Waitlist">
+        <input class="wl-input" type="text" name="full_name" placeholder="YOUR FULL NAME" required>
+        <input class="wl-input" type="email" name="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input class="wl-input" type="text" name="product_interest" placeholder="WHICH PRODUCT INTERESTS YOU?">
         <button type="submit" class="wl-submit">SECURE MY SPOT</button>
         <p class="wl-note">First batch. Founding pricing. St. Pete only.</p>
       </form>
@@ -591,11 +595,13 @@ footer { background: var(--black-soft); border-top: 1px solid rgba(201,168,76,0.
       <div class="cb"><div class="cb-lbl">WHOLESALE</div><div class="cb-val" style="font-size:16px;line-height:1.6;">MedSpas · Luxury Gyms<br>Coastal Resorts · Boutique Wellness</div><div class="cb-sub">Minimum first order: 12 jars · Mix and match SKUs</div></div>
     </div>
     <form class="cf reveal" onsubmit="handleContact(event)">
-      <div class="form-row"><input type="text" placeholder="FIRST NAME" required><input type="text" placeholder="LAST NAME" required></div>
-      <input type="email" placeholder="EMAIL ADDRESS" required>
-      <input type="text" placeholder="COMPANY / BUSINESS (OPTIONAL)">
-      <select><option value="" disabled selected>INQUIRY TYPE</option><option>Product Waitlist</option><option>Wholesale Partnership</option><option>Press and Media</option><option>General Inquiry</option></select>
-      <textarea placeholder="YOUR MESSAGE..."></textarea>
+      <input type="hidden" name="_subject" value="New Contact Form Inquiry">
+      <input type="hidden" name="form_source" value="Contact Page">
+      <div class="form-row"><input type="text" name="first_name" placeholder="FIRST NAME" required><input type="text" name="last_name" placeholder="LAST NAME" required></div>
+      <input type="email" name="email" placeholder="EMAIL ADDRESS" required>
+      <input type="text" name="company" placeholder="COMPANY / BUSINESS (OPTIONAL)">
+      <select name="inquiry_type"><option value="" disabled selected>INQUIRY TYPE</option><option>Product Waitlist</option><option>Wholesale Partnership</option><option>Press and Media</option><option>General Inquiry</option></select>
+      <textarea name="message" placeholder="YOUR MESSAGE..."></textarea>
       <button type="submit" class="cf-submit">SEND MESSAGE</button>
     </form>
   </div>
@@ -623,9 +629,11 @@ footer { background: var(--black-soft); border-top: 1px solid rgba(201,168,76,0.
       <h2 class="modal-title">Be <em>Golden.</em><br>Be First.</h2>
       <p class="modal-body">First batch drops exclusively to our founding community. Join now for your notification and founding pricing.</p>
       <form class="modal-form" onsubmit="handleModal(event)">
-        <input class="modal-input" type="text" placeholder="YOUR FULL NAME" required>
-        <input class="modal-input" type="email" placeholder="YOUR EMAIL ADDRESS" required>
-        <input class="modal-input" type="text" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
+        <input type="hidden" name="_subject" value="New Waitlist Signup (Popup Modal)">
+        <input type="hidden" name="form_source" value="Popup Modal Waitlist">
+        <input class="modal-input" type="text" name="full_name" placeholder="YOUR FULL NAME" required>
+        <input class="modal-input" type="email" name="email" placeholder="YOUR EMAIL ADDRESS" required>
+        <input class="modal-input" type="text" name="instagram_handle" placeholder="INSTAGRAM HANDLE (OPTIONAL)">
         <button type="submit" class="modal-submit">JOIN THE FOUNDING WAITLIST</button>
       </form>
       <p style="font-size:11px;color:var(--gray-1);margin-top:10px;letter-spacing:1px;">No spam. Batch notifications only.</p>
@@ -696,9 +704,21 @@ document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close
 
 function handleModal(e) {
   e.preventDefault();
-  document.getElementById('mForm').style.display = 'none';
-  document.getElementById('mSuccess').classList.add('show');
-  setTimeout(closeModal, 3000);
+  var form = e.target;
+  var data = new FormData(form);
+  fetch('https://formspree.io/f/xvzywbpl', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(response){
+    document.getElementById('mForm').style.display = 'none';
+    document.getElementById('mSuccess').classList.add('show');
+    setTimeout(closeModal, 3000);
+  }).catch(function(error){
+    document.getElementById('mForm').style.display = 'none';
+    document.getElementById('mSuccess').classList.add('show');
+    setTimeout(closeModal, 3000);
+  });
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -706,19 +726,57 @@ function handleModal(e) {
 // ═══════════════════════════════════════════════════════════
 function handleWL(e) {
   e.preventDefault();
-  var btn = e.target.querySelector('.wl-submit');
-  btn.textContent = 'YOU ARE ON THE LIST';
-  btn.style.background = '#2D5A2D';
-  btn.style.color = '#fff';
+  var form = e.target;
+  var btn = form.querySelector('.wl-submit');
+  var data = new FormData(form);
+  btn.textContent = 'SENDING...';
   btn.disabled = true;
+  fetch('https://formspree.io/f/xvzywbpl', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(response){
+    if (response.ok) {
+      btn.textContent = 'YOU ARE ON THE LIST';
+      btn.style.background = '#2D5A2D';
+      btn.style.color = '#fff';
+      form.reset();
+      btn.disabled = true;
+    } else {
+      btn.textContent = 'ERROR - PLEASE TRY AGAIN';
+      btn.disabled = false;
+    }
+  }).catch(function(error){
+    btn.textContent = 'ERROR - PLEASE TRY AGAIN';
+    btn.disabled = false;
+  });
 }
 function handleContact(e) {
   e.preventDefault();
-  var btn = e.target.querySelector('.cf-submit');
-  btn.textContent = 'MESSAGE SENT - WE WILL BE IN TOUCH';
-  btn.style.background = '#2D5A2D';
-  btn.style.color = '#fff';
+  var form = e.target;
+  var btn = form.querySelector('.cf-submit');
+  var data = new FormData(form);
+  btn.textContent = 'SENDING...';
   btn.disabled = true;
+  fetch('https://formspree.io/f/xvzywbpl', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(function(response){
+    if (response.ok) {
+      btn.textContent = 'MESSAGE SENT - WE WILL BE IN TOUCH';
+      btn.style.background = '#2D5A2D';
+      btn.style.color = '#fff';
+      form.reset();
+      btn.disabled = true;
+    } else {
+      btn.textContent = 'ERROR - PLEASE TRY AGAIN';
+      btn.disabled = false;
+    }
+  }).catch(function(error){
+    btn.textContent = 'ERROR - PLEASE TRY AGAIN';
+    btn.disabled = false;
+  });
 }
 
 // ═══════════════════════════════════════════════════════════
